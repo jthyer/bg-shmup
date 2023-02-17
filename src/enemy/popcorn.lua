@@ -2,7 +2,7 @@ local SPEED = 300
 local ACCEL = 120
 local IMAGE = love.graphics.newImage("assets/sprites/popcorn.png")
 
-loadFunc["popcorn"] = function(self)
+loadEnemyFunc["popcorn"] = function(self)
   self.class = "enemy"
   self.width = 48
   self.height = 48
@@ -20,7 +20,7 @@ loadFunc["popcorn"] = function(self)
   end
 end
 
-updateFunc["popcorn"] = function(self,dt)
+updateEnemyFunc["popcorn"] = function(self,dt)
   self.x = self.x + (self.hspeed * self.dir * dt)
   self.y = self.y + (self.vspeed * dt)
  
@@ -31,7 +31,7 @@ updateFunc["popcorn"] = function(self,dt)
     self.bulletTimer = self.bulletTimer - dt
     if self.bulletTimer < 0 then
       local target_x, target_y = getPlayerPos()
-      addBullet("bullet",self.x,self.y,target_x,target_y)
+      --addBullet("bullet",self.x,self.y,target_x,target_y)
     end
   end
   

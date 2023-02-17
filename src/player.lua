@@ -1,19 +1,23 @@
 local PLAYERSPEED = 240
-
 local IMAGE = love.graphics.newImage("assets/sprites/player.png")
 
-loadFunc["player"] = function(self)
-  self.class = "player"
-  self.width = 48
-  self.height = 48
-  self.mask = 24
-  self.image = IMAGE
-  self.rotation = 0
-  
-  setPlayerPos(self.x,self.y)
+local player = {}
+
+function getPlayerPos()
+  return player.x, player.y
 end
 
-updateFunc["player"] = function(self,dt)
+function loadPlayer()
+  player.x = 208
+  player.y = 480
+  player.width = 48
+  player.height = 48
+  player.mask = 24
+  player.image = IMAGE
+  player.rotation = 0
+end
+
+function updatePlayer(dt)
   local hspeed = 0
   local vspeed = 0
   
@@ -37,14 +41,16 @@ updateFunc["player"] = function(self,dt)
   end
   
   -- update position, don't move off side of screen
-  if (self.x + hspeed > 0 and self.x + self.width + hspeed < SCREENWIDTH) then
-    self.x = self.x + hspeed
+  if (player.x + hspeed > 0 and player.x + player.width + hspeed < SCREENWIDTH) then
+    player.x = player.x + hspeed
   end
-  if (self.y + vspeed > 0 and self.y + self.height + vspeed < SCREENHEIGHT) then
-    self.y = self.y + vspeed
+  if (player.y + vspeed > 0 and player.y + player.height + vspeed < SCREENHEIGHT) then
+    player.y = player.y + vspeed
   end
 
-  setPlayerPos(self.x,self.y)
-  
   return true
+end
+
+function drawPlayer()
+  love.graphics.draw(player.image,player.x,player.y,0,1.2,1.2)
 end
