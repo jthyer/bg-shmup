@@ -1,6 +1,5 @@
 local SPEED = 300
 local ACCEL = 120
-
 local IMAGE = love.graphics.newImage("assets/sprites/popcorn.png")
 
 loadFunc["popcorn"] = function(self)
@@ -11,6 +10,8 @@ loadFunc["popcorn"] = function(self)
   self.hspeed = SPEED
   self.vspeed = 0  
   self.image = IMAGE
+  self.rotation = 0
+  self.bulletTimer = 1
   
   if self.x < 0 then 
     self.dir = 1
@@ -25,6 +26,14 @@ updateFunc["popcorn"] = function(self,dt)
  
   self.hspeed = self.hspeed - dt * ACCEL
   self.vspeed = self.vspeed + dt * ACCEL
+  
+  if self.bulletTimer >= 0 then
+    self.bulletTimer = self.bulletTimer - dt
+    if self.bulletTimer < 0 then
+      local target_x, target_y = getPlayerPos()
+      addBullet("bullet",self.x,self.y,target_x,target_y)
+    end
+  end
   
   if self.y > SCREENHEIGHT then return false end
   

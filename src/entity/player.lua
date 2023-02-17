@@ -3,11 +3,14 @@ local PLAYERSPEED = 240
 local IMAGE = love.graphics.newImage("assets/sprites/player.png")
 
 loadFunc["player"] = function(self)
-  self["class"] = "player"
-  self["width"] = 48
-  self["height"] = 48
-  self["mask"] = 24
+  self.class = "player"
+  self.width = 48
+  self.height = 48
+  self.mask = 24
   self.image = IMAGE
+  self.rotation = 0
+  
+  setPlayerPos(self.x,self.y)
 end
 
 updateFunc["player"] = function(self,dt)
@@ -40,6 +43,8 @@ updateFunc["player"] = function(self,dt)
   if (self.y + vspeed > 0 and self.y + self.height + vspeed < SCREENHEIGHT) then
     self.y = self.y + vspeed
   end
+
+  setPlayerPos(self.x,self.y)
   
   return true
 end

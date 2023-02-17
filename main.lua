@@ -1,5 +1,5 @@
 require("src.level")
-require("src.scene.bg")
+require("src.bg.bgPillars")
 
 function love.load()
   love.graphics.setDefaultFilter("nearest", "nearest", 1)
@@ -8,19 +8,18 @@ function love.load()
   SCREENWIDTH = love.graphics.getWidth()
   SCREENHEIGHT = love.graphics.getHeight()
   
-  loadBG()
-  loadLevel()
+  --loadBG()
 end
 
 function love.update(dt)
   local delta = dt
   if delta > 0.1 then delta = 0.1 end
-  updateBG(delta)  
+  --updateBG(delta)  
   updateEntities(delta)
 end
 
 function love.draw()
-  drawBG()
+  --drawBG()
   drawEntities()
 end
 

@@ -1,6 +1,5 @@
 local SPEED = 300
 local ACCEL = 120
-
 local IMAGE = love.graphics.newImage("assets/sprites/popcorn.png")
 
 loadFunc["turret"] = function(self)
@@ -11,9 +10,21 @@ loadFunc["turret"] = function(self)
   self.hspeed = SPEED
   self.vspeed = 0  
   self.image = IMAGE
+  self.rotation = 0
+  self.bulletTimer = 1
 end
 
 updateFunc["turret"] = function(self,dt)
+  self.bulletTimer = self.bulletTimer - dt
+  
+  if self.bulletTimer >= 0 then
+    self.bulletTimer = self.bulletTimer - dt
+    if self.bulletTimer < 0 then
+      local target_x, target_y = getPlayerPos()
+      addBullet("bullet",self.x,self.y,target_x,target_y)
+      print("TEST")
+    end
+  end
 
   if self.y > SCREENHEIGHT then return false end
   
