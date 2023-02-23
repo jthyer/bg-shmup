@@ -1,4 +1,4 @@
-require("src.enemies")
+require("src.enemyManager")
 require("src.player")
 
 function loadLevel(dt)

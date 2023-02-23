@@ -1,10 +1,12 @@
 loadEnemyFunc = {}
 updateEnemyFunc = {}
 
+require("src.enemyBehaviorData")
+
 require("src.enemy.popcorn")
 require("src.enemy.turret")
 
-local ENEMYDATA = require("src.enemiesData")
+local ENEMYDATA = require("src.enemyPlacementData")
 local enemies = {}
 local iterator = 1
 local timer = 0

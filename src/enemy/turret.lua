@@ -22,7 +22,6 @@ updateEnemyFunc["turret"] = function(self,dt)
     if self.bulletTimer < 0 then
       local target_x, target_y = getPlayerPos()
       --addBullet("bullet",self.x,self.y,target_x,target_y)
-      print("TEST")
     end
   end
 
