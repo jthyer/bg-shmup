@@ -1,28 +1,48 @@
-
--- class = enemy type name
--- image = sprite, width, height, mask. We'll worry about rotation and animation later.
--- behaviors (the meat of it): a timer, a behavior name, a table of behaviors
---   setMove - changes movement variables
---     hspeed, vspeed, haccel, vaccel. this should be enough to do a loop de loop
---   createEnemy (making bullets), we'll do this one later
+-- each enemy type has three tables: 
+--   * image data: sprite, width, height, mask (static)
+--   * initial movement values: hspeed, vspeed, haccel, vaccel
+--       (can be changed by behaviors)
+--   * behaviors: made up subtotals for each behavior:
+--       timer, behavior index, behavior arguments
+--       an enemy can have an empty table with no behaviors
 
 local enemyTypeData = {}
-  
+
+
+enemyTypeData["aimedBullet"] = {
+  { love.graphics.newImage("assets/sprites/bullet.png"), 32, 32, 16 } ,
+  { 0, 0, 0, 0 } ,
+  { 
+    { 0, "moveTowardsPlayer", 300  } ,
+    { 0, "break" } ,
+  }
+}
+
 enemyTypeData["sine"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16,
-    200, 100, -200, 0 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { 200, 150, -200, 0 } ,
   { 
     { 2, "setAccel", 200, 0 } ,
+    { 0, "fire", "aimedBullet" } ,
     { 2, "setAccel", -200, 0 } ,
+  }
+}
+enemyTypeData["homing"] = {
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { 0, 0, 0, 0 } ,
+  { 
+    { 0, "moveTowardsPlayer", 200  } ,
+    { 0, "break" } ,
   }
 }
 
 enemyTypeData["looper"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16,
-    -200, 100, 0, 0 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { 0, 0, 0, 0 } ,
   { 
-    { 0, "moveTowardsPlayer", 200  } ,
-    --{ 10, "setSpeed", -200, 0 } ,
+    { 0, "setSpeed",  200, 100 } ,
+    { 0, "setAccel", -100, 0} ,
+    { 0, "break" } ,
   }
 }
 

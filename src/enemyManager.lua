@@ -1,54 +1,81 @@
-local ENEMYTYPEDATA = require("src.enemyTypeData")
+local ENEMYTYPEDATA      = require("src.enemyTypeData")
+local ENEMYPLACEMENTDATA = require("src.enemyPlacementData")
+local enemyBehavior      = require("src.enemyBehavior")
 
--- an enemy contains its behavior table, timer, its behavior iterator, 
--- its x and y, its hspeed, its vspeed
-local loopEnemy = {}
+local enemies = {}
+local enemyItr = 1
+local enemyTimer = 0
+local enemyNext = ENEMYPLACEMENTDATA[enemyItr]
 
-loopEnemy.sprite = ENEMYTYPEDATA["looper"][1][1]
-loopEnemy.behavior = ENEMYTYPEDATA["looper"][2]
-loopEnemy.timer = 0
-loopEnemy.behaviorItr = 1
-loopEnemy.x = 200 
-loopEnemy.y = 100
-loopEnemy.hspeed = ENEMYTYPEDATA["looper"][1][5]
-loopEnemy.vspeed = ENEMYTYPEDATA["looper"][1][6]
-loopEnemy.haccel = ENEMYTYPEDATA["looper"][1][7]
-loopEnemy.vaccel = ENEMYTYPEDATA["looper"][1][8]
-
-function updateEnemies(dt)
-  loopEnemy.timer = loopEnemy.timer + dt
-  if loopEnemy.timer > loopEnemy.behavior[loopEnemy.behaviorItr][1] then
-    -- behavior definitions, maybe pull into their own functions
-    if loopEnemy.behavior[loopEnemy.behaviorItr][2] == "setAccel" then
-      loopEnemy.haccel = loopEnemy.behavior[loopEnemy.behaviorItr][3]
-      loopEnemy.vaccel = loopEnemy.behavior[loopEnemy.behaviorItr][4]
-    elseif loopEnemy.behavior[loopEnemy.behaviorItr][2] == "setSpeed" then
-      loopEnemy.hspeed = loopEnemy.behavior[loopEnemy.behaviorItr][3]
-      loopEnemy.vspeed = loopEnemy.behavior[loopEnemy.behaviorItr][4]    
-    elseif loopEnemy.behavior[loopEnemy.behaviorItr][2] == "moveTowardsPlayer" then
-      local target_x, target_y = getPlayerPos()
-      local angle = math.atan2((target_y - loopEnemy.y), (target_x - loopEnemy.x))
+function createEnemy(index,x,y)
+  local e = {}
   
-      -- loopEnemy.rotation = angle + 1.571
+  e.sprite = ENEMYTYPEDATA[index][1][1]
+  e.behavior = ENEMYTYPEDATA[index][3]
+  e.timer = 0
+  e.behaviorItr = 1
+  e.x, e.y = x, y
+  e.hspeed, e.vspeed = ENEMYTYPEDATA[index][2][1], ENEMYTYPEDATA[index][2][2]
+  e.haccel, e.vaccel = ENEMYTYPEDATA[index][2][3], ENEMYTYPEDATA[index][2][4]
+  if #e.behavior > 0 then
+    e.active = true
+  else
+    e.active = false
+  end
   
-      loopEnemy.hspeed = 200 * math.cos(angle)
-      loopEnemy.vspeed = 200 * math.sin(angle)
-    end
+  table.insert(enemies,e)
+end
+
+function updateEnemy(e, dt)
+  e.timer = e.timer + dt
+  
+  -- make any changes to behavior
+  if e.active and e.timer > e.behavior[e.behaviorItr][1] then
+    local behaviorIndex = e.behavior[e.behaviorItr][2]
     
-    -- iterate to next behavior
-    loopEnemy.timer = 0
-    loopEnemy.behaviorItr = loopEnemy.behaviorItr + 1
-    if loopEnemy.behaviorItr > #loopEnemy.behavior then
-      loopEnemy.behaviorItr = 1
+    enemyBehavior[behaviorIndex](e)
+
+    e.timer = 0
+    e.behaviorItr = e.behaviorItr + 1
+    if e.behaviorItr > #e.behavior then
+      e.behaviorItr = 1
     end
   end
 
-  loopEnemy.hspeed = loopEnemy.hspeed + (loopEnemy.haccel * dt)
-  loopEnemy.vspeed = loopEnemy.vspeed + (loopEnemy.vaccel * dt)
-  loopEnemy.x = loopEnemy.x + (loopEnemy.hspeed * dt)
-  loopEnemy.y = loopEnemy.y + (loopEnemy.vspeed * dt)
+  -- update speed and position
+  e.hspeed = e.hspeed + (e.haccel * dt)
+  e.vspeed = e.vspeed + (e.vaccel * dt)
+  e.x = e.x + (e.hspeed * dt)
+  e.y = e.y + (e.vspeed * dt)
+end
+
+function updateEnemies(dt)
+  -- add any new enemy spawns
+  enemyTimer = enemyTimer + dt
+  if enemyNext[1] < enemyTimer then
+    createEnemy(enemyNext[2],enemyNext[3],enemyNext[4])
+    
+    enemyItr = enemyItr + 1
+    if enemyItr <= #ENEMYPLACEMENTDATA then
+      enemyNext = ENEMYPLACEMENTDATA[enemyItr]
+    else
+      enemyNext = {100000,nil}
+    end
+    enemyTimer = 0
+  end  
+  
+  -- update all existing enemies
+  for i, v in ipairs(enemies) do
+    if v.y > SCREENHEIGHT then
+      table.remove(enemies, i)
+    else
+      updateEnemy(v,dt)
+    end
+  end
 end
 
 function drawEnemies()
-  love.graphics.draw(loopEnemy.sprite,loopEnemy.x,loopEnemy.y,0,1.2,1.2)  
+  for i, v in ipairs(enemies) do
+    love.graphics.draw(v.sprite,v.x,v.y,0,1.2,1.2)
+  end
 end
