@@ -16,8 +16,8 @@ local enemyBehavior = {
   
     --e.rotation = angle + 1.571
   
-    e.hspeed = 300 * math.cos(angle)
-    e.vspeed = 300 * math.sin(angle)
+    e.hspeed = e.behavior[e.behaviorItr][3] * math.cos(angle)
+    e.vspeed = e.behavior[e.behaviorItr][3] * math.sin(angle)
   end,
   
   ["fire"] = function(e,bulletIndex)
