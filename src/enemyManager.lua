@@ -9,7 +9,6 @@ local enemyNext = ENEMYPLACEMENTDATA[enemyItr]
 
 function createEnemy(index,x,y)
   local e = {}
-  
   e.sprite = ENEMYTYPEDATA[index][1][1]
   e.behavior = ENEMYTYPEDATA[index][3]
   e.timer = 0
@@ -24,6 +23,7 @@ function createEnemy(index,x,y)
   end
   
   table.insert(enemies,e)
+  return e
 end
 
 function updateEnemy(e, dt)

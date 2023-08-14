@@ -11,20 +11,30 @@ local enemyBehavior = {
   end,
   
   ["moveTowardsPlayer"] = function(e)
+    local b = e.behavior[e.behaviorItr]
     local target_x, target_y = getPlayerPos()
+    
+    --target_x = target_x + b[4]
+    
     local angle = math.atan2((target_y - e.y), (target_x - e.x))
+    angle = angle + b[4]
   
     --e.rotation = angle + 1.571
   
-    e.hspeed = e.behavior[e.behaviorItr][3] * math.cos(angle)
-    e.vspeed = e.behavior[e.behaviorItr][3] * math.sin(angle)
+    e.hspeed = b[3] * math.cos(angle)
+    e.vspeed = b[3] * math.sin(angle)
   end,
   
-  ["fire"] = function(e,bulletIndex)
-    print("test")
-    createEnemy("aimedBullet",e.x,e.y)
+  ["fire"] = function(e)
+    local b = e.behavior[e.behaviorItr]
+    local bullet = createEnemy(b[3],e.x,e.y)
+    if b[3] == "staticBullet" then
+      bullet.hspeed = b[4][1]
+      bullet.vspeed = b[4][2]
+      bullet.haccel = b[4][3]
+      bullet.vaccel = b[4][4]
+    end
   end,
-    
   
   ["break"] = function(e)
     e.active = false

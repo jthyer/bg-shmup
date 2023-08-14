@@ -1,12 +1,9 @@
-Test commit 3.
+remaining items
+- collision with enemies
+- player shooting
+- add tile map background (scroll based on enemy timer to ensure consistency)
+- add placeholder art
+- arcade fixings: score, title screen, lives, game over
 
-world variables:
-- timer: This is the only thing that matters for generating enemy waves expanse style. The level just iterates through a timed list of entities. 
-- score
-- number of lives
-
-the player is just an entity that happens to be connected with the keyboard. it can interact with the score and number of lives world state. 
-
-I can worry about adding a tile map later.
-
-Remember to try love.graphics.setCanvas for doing the tile map background
+work on tile map next
+remember to try love.graphics.setCanvas for doing the tile map background
