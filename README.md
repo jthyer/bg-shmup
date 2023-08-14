@@ -5,5 +5,5 @@ remaining items
 - add placeholder art
 - arcade fixings: score, title screen, lives, game over
 
-work on tile map next
+work on setting canvas next
 remember to try love.graphics.setCanvas for doing the tile map background
