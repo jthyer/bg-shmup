@@ -1,6 +1,6 @@
-NUMLEVELS = 1
-SCREENTILEWIDTH = 15
-SCREENTILEHEIGHT = 20
+local NUMLEVELS = 1
+local SCREENTILEWIDTH = 15
+local SCREENTILEHEIGHT = 40
 
 local json = require("lib.json")
 local bgData = {}
@@ -12,10 +12,10 @@ for level = 1,NUMLEVELS do
 
   local tileTable = jsonData["layers"][1]["data"]
 
-  for i = 1, 20 do
+  for i = 1, SCREENTILEHEIGHT do
     local row = {}
-    for i2 = 1, 15 do
-      table.insert(row,tileTable[i2+((i-1)*15)])
+    for i2 = 1, SCREENTILEWIDTH do
+      table.insert(row,tileTable[i2+((i-1)*SCREENTILEWIDTH)])
     end
     table.insert(bgData[level],row)
   end

@@ -1,8 +1,13 @@
 local BGDATA = require("src.bgData")
+local LEVELWIDTH = 480
+local LEVELHEIGHT = 1280
 
 local quads = {}
+local canvas = love.graphics.newCanvas(LEVELWIDTH,LEVELHEIGHT)
+local rotation = 0
+local y = -LEVELHEIGHT+ 640
 
-function loadBG()
+function loadBG(level)
   bg_tileset = love.graphics.newImage("assets/tilesets/tileset1.png")
   
   local image_width = bg_tileset:getWidth()
@@ -15,12 +20,20 @@ function loadBG()
     for j = 0, cols-1 do
       table.insert(quads,love.graphics.newQuad(
           j * 32, i * 32, 32, 32, image_width,image_height))
-      print(i)
     end
   end 
+  
+  love.graphics.setCanvas(canvas)
+  drawCanvas(level)
+  love.graphics.setCanvas()
 end
 
-function drawBG(level)
+function updateBG(dt)
+  rotation = rotation + dt
+  y = y + (50*dt)
+end
+
+function drawCanvas(level)
   love.graphics.setColor(1,1,1)
   for i,v in ipairs(BGDATA[level]) do
     for j,v2 in ipairs(v) do
@@ -31,4 +44,8 @@ function drawBG(level)
       end
     end
   end
+end
+
+function drawBG()
+  love.graphics.draw(canvas, 0, y, 0, 1, 1)
 end

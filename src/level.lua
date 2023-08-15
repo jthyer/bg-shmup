@@ -2,18 +2,22 @@ require("src.enemyManager")
 require("src.player")
 require("src.bg")
 
+local level = 1
+
+
 function loadLevel(dt)
-  loadBG()
+  loadBG(level)
   loadPlayer()
 end
 
 function updateLevel(dt)
+  updateBG(dt)
   updateEnemies(dt)
   updatePlayer(dt)
 end
 
 function drawLevel()
-  drawBG(1)
+  drawBG()
   drawEnemies()
   drawPlayer()
 end

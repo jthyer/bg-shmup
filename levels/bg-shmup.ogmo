@@ -29,6 +29,6 @@
   ],
   "entities": [],
   "tilesets": [
-    {"label": "New Tileset", "path": "../assets/tileset1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACNSURBVEhL7ZK7DYAwDESZl41Yiy4rZAlAMjLBcXwOvwJZegUx53tFMkwpv0oIICGAfCsY50WlzBioyUNgdMFfRuAk4O8aUUFHe4XYBZ40Zzxhpu+SqdrfvtEnuEAIID8W8IssERkPuqBV5x8yisBYqMX1RCAFcIECJSIgUARicpPmJT9FCCAhgLwsSHkFW61pL4PghWAAAAAASUVORK5CYII=", "tileWidth": 32, "tileHeight": 32, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
+    {"label": "New Tileset", "path": "../assets/tilesets/tileset1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACNSURBVEhL7ZK7DYAwDESZl41Yiy4rZAlAMjLBcXwOvwJZegUx53tFMkwpv0oIICGAfCsY50WlzBioyUNgdMFfRuAk4O8aUUFHe4XYBZ40Zzxhpu+SqdrfvtEnuEAIID8W8IssERkPuqBV5x8yisBYqMX1RCAFcIECJSIgUARicpPmJT9FCCAhgLwsSHkFW61pL4PghWAAAAAASUVORK5CYII=", "tileWidth": 32, "tileHeight": 32, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
   ]
 }
