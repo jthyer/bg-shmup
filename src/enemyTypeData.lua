@@ -8,8 +8,24 @@
 
 local enemyTypeData = {}
 
+enemyTypeData["down"] = {
+  { love.graphics.newImage("assets/sprites/bullet.png"), 48, 48, 16} ,
+  { 0, 250, 0, 0 } ,
+  {
+    { 0, "break" } ,
+  }
+}
+
+enemyTypeData["left"] = {
+  { love.graphics.newImage("assets/sprites/bullet.png"), 48, 48, 16} ,
+  { -250, 0, 0, 0 } ,
+  {
+    { 0, "break" } ,
+  }
+}
+
 enemyTypeData["staticBullet"] = {
-  { love.graphics.newImage("assets/sprites/bullet.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/bullet.png"), 16, 16, 4} ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "break" } ,
@@ -17,7 +33,7 @@ enemyTypeData["staticBullet"] = {
 }
 
 enemyTypeData["aimedBullet"] = {
-  { love.graphics.newImage("assets/sprites/bullet.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/bullet.png"), 16, 16, 4} ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "moveTowardsPlayer", 350, 0 } ,
@@ -26,7 +42,7 @@ enemyTypeData["aimedBullet"] = {
 }
 
 enemyTypeData["aimedBulletOffsetL"] = {
-  { love.graphics.newImage("assets/sprites/bullet.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/bullet.png"), 16, 16, 4 } ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "moveTowardsPlayer", 350, -0.3} ,
@@ -35,7 +51,7 @@ enemyTypeData["aimedBulletOffsetL"] = {
 }
 
 enemyTypeData["aimedBulletOffsetR"] = {
-  { love.graphics.newImage("assets/sprites/bullet.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/bullet.png"), 16, 16, 4 } ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "moveTowardsPlayer", 350, 0.3 } ,
@@ -44,7 +60,7 @@ enemyTypeData["aimedBulletOffsetR"] = {
 }
 
 enemyTypeData["sine"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 200, 150, -200, 0 } ,
   { 
     { 2, "setAccel", 200, 0 } ,
@@ -54,7 +70,7 @@ enemyTypeData["sine"] = {
 }
 
 enemyTypeData["dartR"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 250, 0, 0 } ,
   { 
     { 0.5, "setAccel", 400, 0 } ,
@@ -65,7 +81,7 @@ enemyTypeData["dartR"] = {
 }
 
 enemyTypeData["dartL"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 250, 0, 0 } ,
   { 
     { 0.5, "setAccel", -400, 0 } ,
@@ -76,7 +92,7 @@ enemyTypeData["dartL"] = {
 }
 
 enemyTypeData["dartRBullet"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 250, 0, 0 } ,
   { 
     { 0.5, "setAccel", 400, 0 } ,
@@ -88,7 +104,7 @@ enemyTypeData["dartRBullet"] = {
 }
 
 enemyTypeData["dartLBullet"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 250, 0, 0 } ,
   { 
     { 0.5, "setAccel", -400, 0 } ,
@@ -100,7 +116,7 @@ enemyTypeData["dartLBullet"] = {
 }
 
 enemyTypeData["missileL"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 16, 16, 4 } ,
   { -100, 550, 0, 0 } ,
   { 
     { 0, "break" }
@@ -108,7 +124,7 @@ enemyTypeData["missileL"] = {
 }
 
 enemyTypeData["missileStraight"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 16, 16, 4 } ,
   { 0, 550, 0, 0 } ,
   { 
     { 0, "break" }
@@ -116,7 +132,7 @@ enemyTypeData["missileStraight"] = {
 }
 
 enemyTypeData["missileR"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 16, 16, 4 } ,
   { 100, 550, 0, 0 } ,
   { 
     { 0, "break" }
@@ -124,7 +140,7 @@ enemyTypeData["missileR"] = {
 }
 
 enemyTypeData["spinner"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 100, 0, 0 } ,
   { 
     { 1, "fire", "staticBullet", {350*.71,350*.71,0,0} } ,
@@ -139,7 +155,7 @@ enemyTypeData["spinner"] = {
 }
 
 enemyTypeData["turret"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 200, 0, 0 } ,
   { 
     { 0.75, "setAccel", 0, -360 } ,
@@ -154,7 +170,7 @@ enemyTypeData["turret"] = {
 }
 
 enemyTypeData["spreader"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 200, 0, 0 } ,
   { 
     { 1, "fire", "staticBullet", {350*.71,350*.71,0,0} } ,
@@ -166,7 +182,7 @@ enemyTypeData["spreader"] = {
 
 
 enemyTypeData["homing"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "moveTowardsPlayer", 100  } ,
@@ -175,7 +191,7 @@ enemyTypeData["homing"] = {
 }
 
 enemyTypeData["boss"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { -100, 0, 0, 0 } ,
   { 
     { 1, "fire", "aimedBullet", 350 } ,
@@ -211,7 +227,7 @@ enemyTypeData["boss"] = {
 }
 
 enemyTypeData["arc"] = {
-  { love.graphics.newImage("assets/sprites/popcorn.png"), 32, 32, 16 } ,
+  { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 0, 0, 0 } ,
   { 
     { 0, "setSpeed",  400, 100 } ,

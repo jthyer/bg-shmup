@@ -7,6 +7,10 @@ local canvas = love.graphics.newCanvas(LEVELWIDTH,LEVELHEIGHT)
 local rotation = 0
 local y = -LEVELHEIGHT+ 640
 
+function restartBG()
+  y = -LEVELHEIGHT+ 640 
+end
+
 function loadBG(level)
   bg_tileset = love.graphics.newImage("assets/tilesets/tileset1.png")
   

@@ -13,13 +13,10 @@ local enemyBehavior = {
   ["moveTowardsPlayer"] = function(e)
     local b = e.behavior[e.behaviorItr]
     local target_x, target_y = getPlayerPos()
-    
-    --target_x = target_x + b[4]
-    
+       
     local angle = math.atan2((target_y - e.y), (target_x - e.x))
-    angle = angle + b[4]
-  
-    --e.rotation = angle + 1.571
+    angle = angle + b[4]          -- add target offset
+    --e.rotation = angle + 1.571  -- rotate bullet, add argument?
   
     e.hspeed = b[3] * math.cos(angle)
     e.vspeed = b[3] * math.sin(angle)
