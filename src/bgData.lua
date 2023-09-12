@@ -1,6 +1,6 @@
 local NUMLEVELS = 1
 local SCREENTILEWIDTH = 15
-local SCREENTILEHEIGHT = 40
+local SCREENTILEHEIGHT = 62
 
 local json = require("lib.json")
 local bgData = {}

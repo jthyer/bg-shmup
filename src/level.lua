@@ -27,4 +27,6 @@ function drawLevel()
   drawBG()
   drawPlayer()
   drawEnemies()
+  drawDeath()
+  drawEnemyCount()
 end

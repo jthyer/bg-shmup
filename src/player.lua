@@ -80,14 +80,16 @@ function updatePlayer(dt)
 end
 
 function drawPlayer()
-  if not player.death then
-    love.graphics.setColor(0,1,0)
-    love.graphics.rectangle("fill",player.x,player.y,player.w,player.h)
-    love.graphics.setColor(1,1,1)
-    love.graphics.rectangle("fill",player.mask_x,player.mask_y,
-      player.mask_w,player.mask_h)
+  love.graphics.setColor(0,1,0)
+  love.graphics.rectangle("fill",player.x,player.y,player.w,player.h)
+  love.graphics.setColor(1,1,1)
+  love.graphics.rectangle("fill",player.mask_x,player.mask_y,
+    player.mask_w,player.mask_h)
  --   love.graphics.draw(player.image,player.x,player.y,0,1.2,1.2)
-  else
+end
+
+function drawDeath()
+  if player.death then 
     love.graphics.setColor(1,0,0)
     love.graphics.rectangle("fill",0,0,480,640)
     love.graphics.setColor(1,1,1)

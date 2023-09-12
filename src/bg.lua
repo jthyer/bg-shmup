@@ -1,10 +1,9 @@
 local BGDATA = require("src.bgData")
 local LEVELWIDTH = 480
-local LEVELHEIGHT = 1280
+local LEVELHEIGHT = 1984
 
 local quads = {}
 local canvas = love.graphics.newCanvas(LEVELWIDTH,LEVELHEIGHT)
-local rotation = 0
 local y = -LEVELHEIGHT+ 640
 
 function restartBG()
@@ -33,7 +32,6 @@ function loadBG(level)
 end
 
 function updateBG(dt)
-  rotation = rotation + dt
   y = y + (50*dt)
 end
 

@@ -23,8 +23,9 @@ end
 
 function createEnemy(index,x,y)
   local e = {}
+  e.index = index
   e.sprite = ENEMYTYPEDATA[index][1][1]
-  e.color = {1,0,0}
+  e.color = {1, 0, 0}
   e.behavior = ENEMYTYPEDATA[index][3]
   e.timer = 0
   e.behaviorItr = 1
@@ -93,7 +94,11 @@ function updateEnemies(dt)
   end
 end
 
-function drawEnemies()
+function drawEnemyCount()
+  love.graphics.printf(#enemies,0,0,500,"left")
+end
+
+function drawEnemies()  
   for i, v in ipairs(enemies) do
     love.graphics.setColor(v.color)
     love.graphics.rectangle("fill",v.x,v.y,v.w,v.h)

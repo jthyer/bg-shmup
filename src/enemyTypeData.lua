@@ -185,7 +185,7 @@ enemyTypeData["homing"] = {
   { love.graphics.newImage("assets/sprites/popcorn.png"), 48, 48, 16 } ,
   { 0, 0, 0, 0 } ,
   { 
-    { 0, "moveTowardsPlayer", 100  } ,
+    { 0, "moveTowardsPlayer", 100, 0 } ,
 
   }
 }
