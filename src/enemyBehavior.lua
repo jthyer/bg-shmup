@@ -24,7 +24,7 @@ local enemyBehavior = {
   
   ["fire"] = function(e)
     local b = e.behavior[e.behaviorItr]
-    local bullet = createEnemy(b[3],e.x,e.y)
+    local bullet = createEnemy(b[3],e.x+16,e.y+16)
     if b[3] == "staticBullet" then
       bullet.hspeed = b[4][1]
       bullet.vspeed = b[4][2]

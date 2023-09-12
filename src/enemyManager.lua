@@ -8,9 +8,11 @@ function checkPlayerCollision()
   local player_x, player_y, player_w, player_h = getPlayerMask()
   
   for i,v in ipairs(enemies) do
-    if checkCollision(player_x,player_y,player_w,player_h,v.x+v.mask,v.y+v.mask,v.w-(v.mask*2),v.h-(v.mask*2)) then
+    if checkCollision(player_x,player_y,player_w,player_h,
+      v.x+v.mask,v.y+v.mask,v.w-(v.mask*2),v.h-(v.mask*2)) then
       killPlayer()
     end
+
   end
 end
 
@@ -27,6 +29,7 @@ function createEnemy(index,x,y)
   e.sprite = ENEMYTYPEDATA[index][1][1]
   e.color = {1, 0, 0}
   e.behavior = ENEMYTYPEDATA[index][3]
+  e.health = ENEMYTYPEDATA[index][1][5]
   e.timer = 0
   e.behaviorItr = 1
   e.x, e.y = x, y
@@ -79,7 +82,7 @@ function updateEnemies(dt)
     if enemyItr <= #ENEMYPLACEMENTDATA then
       enemyNext = ENEMYPLACEMENTDATA[enemyItr]
     else
-      enemyNext = {100000,nil}
+      enemyNext = {1000000,nil}
     end
     enemyTimer = 0
   end  
@@ -88,14 +91,20 @@ function updateEnemies(dt)
   for i, v in ipairs(enemies) do
     if v.y > SCREENHEIGHT then
       table.remove(enemies, i)
+    elseif v.health ~= -1 and 
+      checkBulletCollision(v.x+v.mask,v.y+v.mask,v.w-(v.mask*2),v.h-(v.mask*2)) then
+      v.health = v.health - 1
+      if v.health == 0 then
+        table.remove(enemies, i)
+      end
     else
       updateEnemy(v,dt)
     end
   end
 end
 
-function drawEnemyCount()
-  love.graphics.printf(#enemies,0,0,500,"left")
+function getEnemyCount()
+  return #enemies
 end
 
 function drawEnemies()  

@@ -1,3 +1,5 @@
+require("src.playerBullet")
+
 local PLAYERSPEED = 240
 local IMAGE = love.graphics.newImage("assets/sprites/player.png")
 
@@ -27,9 +29,12 @@ function loadPlayer()
   player.mask = 16
   setPlayerMask()
   player.image = IMAGE
+  player.cooldown = 0
   player.rotation = 0
   player.death = false
   player.deathTimer = 1
+  
+  loadBullets()
 end
 
 function killPlayer()
@@ -75,11 +80,24 @@ function updatePlayer(dt)
   end
 
   setPlayerMask()
+  
+  if player.cooldown > 0 then
+    player.cooldown = player.cooldown - dt
+    if player.cooldown < 0 then player.cooldown = 0 end
+  end
+  
+  if player.cooldown == 0 then --and love.keyboard.isDown("space") then
+    loadBullet(player.x,player.y)
+    player.cooldown = 0.15
+  end
+  updateBullets(dt)
 
   return true
 end
 
 function drawPlayer()
+  drawBullets()
+  
   love.graphics.setColor(0,1,0)
   love.graphics.rectangle("fill",player.x,player.y,player.w,player.h)
   love.graphics.setColor(1,1,1)

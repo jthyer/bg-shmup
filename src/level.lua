@@ -4,6 +4,7 @@ require("src.bg")
 require("src.collide")
 
 local level = 1
+local instanceCount
 
 function restartLevel()
   restartBG()
@@ -21,6 +22,8 @@ function updateLevel(dt)
   updateBG(dt)
   updatePlayer(dt)
   updateEnemies(dt)
+  
+  instanceCount = getEnemyCount()+getBulletCount()+1
 end
 
 function drawLevel()
@@ -28,5 +31,9 @@ function drawLevel()
   drawPlayer()
   drawEnemies()
   drawDeath()
-  drawEnemyCount()
+  drawInstanceCount()
+end
+
+function drawInstanceCount()
+  love.graphics.printf(instanceCount,0,0,500,"left")
 end
