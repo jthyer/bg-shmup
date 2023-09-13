@@ -1,4 +1,5 @@
 -- try variable shot rates later!
+-- removing bullets from table mid-for loop skips a bullet, fix
 
 local BULLETSPEED = 450
 local IMAGE = love.graphics.newImage("assets/sprites/player.png")

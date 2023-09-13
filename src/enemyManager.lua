@@ -1,3 +1,5 @@
+-- removing enemies from table mid-for loop skips an enemy, fix
+
 local ENEMYTYPEDATA      = require("src.enemyTypeData")
 local ENEMYPLACEMENTDATA = require("src.enemyPlacementData")
 local enemyBehavior      = require("src.enemyBehavior")
