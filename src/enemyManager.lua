@@ -1,4 +1,5 @@
 -- removing enemies from table mid-for loop skips an enemy, fix
+-- aimed bullets fired up don't get removed from game, fix
 
 local ENEMYTYPEDATA      = require("src.enemyTypeData")
 local ENEMYPLACEMENTDATA = require("src.enemyPlacementData")
